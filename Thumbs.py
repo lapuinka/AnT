@@ -5,12 +5,14 @@ import numpy as np
 from PIL import Image
 from scipy.ndimage import zoom
 
-senda = 'M:\\img\\out\\'
+senda = 'M:\\sec\\'
 saida = 'm:\\img\\imagem_combinada.jpg'
 
-largura, altura, x , y  , c , l , i  , matrix , matriy = 201, 354,  0 , 0 , 0 , 0 , 0 , 100, 50
+largura, altura, x , y  , c , l , i  , matrix , matriy = 201, 354,  0 , 0 , 0 , 0 , 0 , 1000, 22
 imagem_final = Image.new('RGB', (largura * matrix, altura * matriy))
 for filename in os.listdir(senda):
+     if not filename.endswith(".jpeg") or filename.endswith(".jpg"):
+        continue
      if(i >= (matrix * matriy)):
          break
      caminho =  senda + filename 
@@ -25,7 +27,7 @@ for filename in os.listdir(senda):
         x = c * largura
         c = c + 1
      i = i + 1
-     print(str(i) +":cl[" + str(c-1)+","+str(l)  + "],x:" + str(x) + ",y:" + str(y))
+     print(str(i) +":cl[" + str(c-1)+","+str(l)  + "],x:" + str(x) + ",y:" + str(y) +" f: "+ str(filename)) 
      imagem_final.paste(img, (x, y))
 imagem_final.show()
 imagem_final.save(saida)
